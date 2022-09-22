@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <title>Uma lista qualquer - JS</title>
+</head>
+<body>
+    <form>
+      <div id="container" class="container">
+        <header>
+          <h1>Uma lista qualquer</h1>
+        </header>
+        <input id="inputItem"
+          type="text"
+          name="inItem"
+          placeholder="Digite o item..."
+        />
+        <button id="botaoAdicionar" type="button" onClick=adicionarItem()>
+          Adicionar
+        </button>
+
+        <div id="cartaoItem" class="cartaoItem">
+            
+        </div>
+      </div>
+    </form>
+
+    <script type="text/javascript" src="./index.js"></script>
+</body>
+</html>
