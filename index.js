@@ -57,9 +57,25 @@ const atualizarUsuario = async () =>{
 
 }
 
-/*const editarItem = async (id) => {
+/*const criarItem = async () =>{
     const doc = {
-        conteudo: form.inItem.value
+        conteudo: form.inItem.value,
+        idUsuario: sessionStorage.idUsu
+    }
+
+    alert(JSON.stringify(doc));
+
+    await fetch('http://localhost:8080/item',{
+        method: 'POST',
+        body: JSON.stringify(doc),
+        headers: {'Content-Type': 'application/json'}
+    });
+}*/
+
+const editarItem = async (id) => {
+    const doc = {
+        conteudo: form.inItem.value,
+        idUsuario: sessionStorage.idUsu
     }
 
     await fetch(`http://localhost:8080/item/${id}`,{
@@ -69,20 +85,20 @@ const atualizarUsuario = async () =>{
     });
 
     window.location.replace('index.html');
-}*/
+}
 
-/*const deleteItem = async (id) => {
+const deleteItem = async (id) => {
     await fetch(`http://localhost:8080/item/${id}`,{
         method: 'DELETE'
     });
-}*/
+}
 
 const adicionarItem = async () => {
     await atualizarUsuario();
     await renderItens();
 }
 
-/*function selecionarItemParaEdicao(event){
+function selecionarItemParaEdicao(event){
     const targetId = event.target.id;
     const id = targetId.substr('imgEditar'.length, targetId.length-1);
     inputItemTemp = document.querySelector("#textoItem"+id);
@@ -90,21 +106,21 @@ const adicionarItem = async () => {
     let element = document.querySelector("#botaoAdicionar");
     element.textContent = "Atualizar";
     element.onclick=atualizarItem;
-}*/
+}
 
-/*function atualizarItem(){
+function atualizarItem(){
     const id = inputItemTemp.id.substr('textoItem'.length, inputItemTemp.id.length-1);
     editarItem(id);
     inputItemTemp.textContent = inputItem.value;
     let element = document.querySelector("#botaoAdicionar");
     element.textContent = "Adicionar";
     element.onclick=adicionarItem;
-}*/
+}
 
-/*function removerItem(event){
+function removerItem(event){
     const targetId = event.target.id;
     const id = targetId.substr('imgRemover'.length, targetId.length-1);
     let itemTemp = document.querySelector("#div"+id);
     itemTemp.remove();
     deleteItem(id);
-}*/
+}
