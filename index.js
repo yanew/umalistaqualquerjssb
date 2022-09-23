@@ -11,7 +11,7 @@ const renderItens = async () => {
     const uri = `http://localhost:8080/usuario/${sessionStorage.idUsu}`;
     const res = await fetch(uri);
     const usuario = await res.json();
-
+    
     let template = '';
         usuario.listaItens.forEach(item => {
             template+= `
@@ -36,47 +36,22 @@ const renderItens = async () => {
 
 window.addEventListener('DOMContentLoaded', () => renderItens());
 
-const criarItem = async () => {
-    const item = {
-        conteudo: form.inItem.value
-    }
+const atualizarUsuario = async () =>{
 
-    await fetch('http://localhost:8080/item',{
-        method: 'POST',
-        body: JSON.stringify(item),
-        headers: {'Content-Type': 'application/json'}
-    });
-
-    window.location.replace('index.html');
-}
-
-const updateUsuario = async () =>{
-
-    const uri = `http://localhost:8080/usuario/${sessionStorage.idUsu}`;    
-    alert(uri);
+    const uri = `http://localhost:8080/usuario/${sessionStorage.idUsu}`;   
     const res = await fetch(uri);
-    alert(res);
-    //const usuario = await res.json();
+    const usuario = await res.json();
 
-    
-    //alert(usuario.nome);
+    const novoItem = {conteudo: form.inItem.value}
+    const listaAtualizada = {listaItens:[...usuario.listaItens, novoItem]}
 
-   /* let novaListaItens = usuario.listaItens;
-    novaListaItens[usuario.listaItens.length-1] = form.inItem.value;
+    const usuarioTemp = {...usuario, ...listaAtualizada}
 
-    const usuarioTemp = {
-        listaItens: novaListaItens
-    }
-
-    alert(usuario);
-
-    await fetch(`http://localhost:8080/usuario/${sessionStorage.idUsu}`,{
+    await fetch(uri,{
         method: 'PUT',
         body: JSON.stringify(usuarioTemp),
         headers: {'Content-Type': 'application/json'}
-    });*/
-
-    alert('finalizou updateUsuario');
+    });
 
     window.location.replace('index.html');
 
@@ -84,11 +59,10 @@ const updateUsuario = async () =>{
 
 /*const editarItem = async (id) => {
     const doc = {
-        conteudo: form.inItem.value,
-        id_usuario: sessionStorage.idUsu
+        conteudo: form.inItem.value
     }
 
-    await fetch(`http://localhost:3000/item/${id}`,{
+    await fetch(`http://localhost:8080/item/${id}`,{
         method: 'PUT',
         body: JSON.stringify(doc),
         headers: {'Content-Type': 'application/json'}
@@ -98,18 +72,17 @@ const updateUsuario = async () =>{
 }*/
 
 /*const deleteItem = async (id) => {
-    await fetch(`http://localhost:3000/item/${id}`,{
+    await fetch(`http://localhost:8080/item/${id}`,{
         method: 'DELETE'
     });
 }*/
 
 const adicionarItem = async () => {
-    await criarItem();
-    await updateUsuario();
+    await atualizarUsuario();
     await renderItens();
 }
 
-function selecionarItemParaEdicao(event){
+/*function selecionarItemParaEdicao(event){
     const targetId = event.target.id;
     const id = targetId.substr('imgEditar'.length, targetId.length-1);
     inputItemTemp = document.querySelector("#textoItem"+id);
@@ -117,7 +90,7 @@ function selecionarItemParaEdicao(event){
     let element = document.querySelector("#botaoAdicionar");
     element.textContent = "Atualizar";
     element.onclick=atualizarItem;
-}
+}*/
 
 /*function atualizarItem(){
     const id = inputItemTemp.id.substr('textoItem'.length, inputItemTemp.id.length-1);
@@ -128,10 +101,10 @@ function selecionarItemParaEdicao(event){
     element.onclick=adicionarItem;
 }*/
 
-function removerItem(event){
+/*function removerItem(event){
     const targetId = event.target.id;
     const id = targetId.substr('imgRemover'.length, targetId.length-1);
     let itemTemp = document.querySelector("#div"+id);
     itemTemp.remove();
     deleteItem(id);
-}
+}*/
